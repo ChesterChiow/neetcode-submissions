@@ -3,9 +3,14 @@ class Solution:
         if len(s) != len(t):
             return False
         
-        countS, countT = {}, {}
+        # Hash Table
+        count = [0] * 26
 
         for i in range(len(s)):
-            countS[s[i]] = 1 + countS.get(s[i], 0)
-            countT[t[i]] = 1 + countT.get(t[i], 0)
-        return countS == countT
+            count[ord(s[i]) - ord('a')] += 1 # increment if in s
+            count[ord(t[i]) - ord('a')] -= 1 # decremet if in t
+
+        for val in count:
+            if val != 0: # if 0: same number of letters
+                return False
+        return True
